@@ -6,19 +6,19 @@
 	<title>My Blog</title>
 	<link rel="stylesheet" href="{{ url('app.css') }}">
 </head>
-
- 	<?php foreach ($posts as $post) : ?>
+ 	@foreach ($posts as $post)
+ 		{{-- @dd($loop) Gives information about iteration
+	 		<div class="{{ $loop->even ? 'classname' : '' }}"></div>
+	    --}}
  		<article>
  			<h1>
- 				<a href="/post/<?=$post->slug;?>">
- 					<?= $post->title;?>
+ 				<a href="/post/{{ $post->slug }}">
+ 					{{ $post->title }}
  				</a>
  			</h1>
-
  			<div>
- 				<?=$post->excerpt;?>
+				{{ $post->excerpt }}
  			</div>
  		</article>
- 	<?php endforeach;?>
-
+ 	@endforeach
 </html>
