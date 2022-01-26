@@ -5,7 +5,7 @@
 	    --}}
  		<article>
  			<h1>
- 				<a href="/post/{{ $post->id }}">
+ 				<a href="/post/{{ $post->slug }}">
  					{{ $post->title }}
  				</a>
  			</h1>
@@ -15,6 +15,5 @@
  		</article>
  	@endforeach
 </x-layout>
-
 
 
