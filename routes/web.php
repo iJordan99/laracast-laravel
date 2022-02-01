@@ -17,8 +17,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //see db queries, alternative to clockwork
+    // Illuminate\Support\Facades\DB::listen(function ($query){
+    //     logger($query->sql, $query->bindings);
+    // });
+
+    //Post::all() would do 1 query for fetching all of the posts and then 1 for each number of post to fetch its category
+    //this way is better as its only 2 queries regardless of how many posts there are.
     return view('home', [
-        'posts' => Post::all()
+        'posts' => Post::with('category')->get()
     ]);
 });
 
