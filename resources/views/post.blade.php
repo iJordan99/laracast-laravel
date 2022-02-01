@@ -3,7 +3,8 @@
 		{{-- {!!  !!} for escaping as we're in control of content--}}
 		<h1>{!! $post->title !!}</h1>
 
-		<a href="#"><p>{!! $post->category->name !!}</p></a>
+		<a href="/categories/{{ $post->category->slug }}"><p>{!! $post->category->name !!}</p></a>
+		{{-- <p>{!! $post->category->name !!}</p> --}}
 		<div>
 			{!! $post->body !!}
 		</div>
