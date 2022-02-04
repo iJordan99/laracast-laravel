@@ -37,9 +37,11 @@ Route::get('post/{post:slug} ', function (Post $post) {
 });
 
 Route::get('categories/{category:slug} ', function (Category $category) {
+    //'to eager load without the with property -> $category->post->load(['category', 'author'])
     return view('home',[
         'posts' => $category->post
     ]);
+
 });
 
 Route::get('authors/{author:username} ', function (User $author) {

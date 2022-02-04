@@ -22,6 +22,10 @@ class Post extends Model
         'body',
     ];
 
+    // $with is the additional relationships for queries, e.g get the categories and authors by default
+    // when toggled use Post::without(['category', 'author'])->get();
+    protected $with = ['category', 'author'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
