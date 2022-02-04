@@ -27,9 +27,11 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    // laravel assumed the method name is the foreign id in db by default e.g user() would look for user_id etc ..
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        // you can manually tell laravel what the foreign key is
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }
