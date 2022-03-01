@@ -26,27 +26,33 @@ Route::get('/', function () {
     //Post::all() would do 1 query for fetching all of the posts and then 1 for each number of post to fetch its category
     //this way is better as its only 2 queries regardless of how many posts there are.
     return view('home', [
-        'posts' => Post::latest()->with('category','author')->get()
+        'posts' => Post::latest()->with('category', 'author')->get(),
+        'categories' => Category::all()
     ]);
-});
+})->name('home');
 
 Route::get('post/{post:slug} ', function (Post $post) {
-    return view('post',[
+    return view('post', [
         'post' => $post
     ]);
 });
 
 Route::get('categories/{category:slug} ', function (Category $category) {
     //'to eager load without the with property -> $category->post->load(['category', 'author'])
-    return view('home',[
-        'posts' => $category->post
+    return view('home', [
+        'posts' => $category->post,
+        'currentCategory' => $category,
+        'categories' => Category::all()
     ]);
-
-});
+})->name('category');
 
 Route::get('authors/{author:username} ', function (User $author) {
-    return view('home',[
-        'posts' => $author->posts
+    return view('home', [
+        'posts' => $author->posts,
+        'categories' => Category::all()
     ]);
 });
 
+Route::get('test/', function () {
+    return 'Pussio';
+});
