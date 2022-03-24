@@ -26,6 +26,15 @@ class Post extends Model
     // when toggled use Post::without(['category', 'author'])->get();
     protected $with = ['category', 'author'];
 
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%');
+        }
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -37,5 +46,4 @@ class Post extends Model
         // you can manually tell laravel what the foreign key is
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }
