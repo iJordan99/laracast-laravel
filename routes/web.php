@@ -22,22 +22,9 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show']);
 
-Route::get('categories/{category:slug} ', function (Category $category) {
-    //'to eager load without the with property -> $category->post->load(['category', 'author'])
-    return view('home', [
-        'posts' => $category->post,
-        'currentCategory' => $category,
-        'categories' => Category::all()
-    ]);
-})->name('category');
-
 Route::get('authors/{author:username} ', function (User $author) {
     return view('home', [
         'posts' => $author->posts,
         'categories' => Category::all()
     ]);
-});
-
-Route::get('test/', function () {
-    return 'Pussio';
 });
