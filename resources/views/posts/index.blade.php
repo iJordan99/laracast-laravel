@@ -1,3 +1,4 @@
+
 <x-layout>
 	@include ('posts._header')
 	
@@ -14,6 +15,7 @@
 					@endforeach
 				</div>				
 			@endif
+			{{ $posts->links() }}
 		@else
 			<p class="text-center">No posts just yet</p>	
 		@endif

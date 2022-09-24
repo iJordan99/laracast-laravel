@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Concerns\belongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,9 +29,9 @@ class Post extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, fn ($query, $search) =>
-        $query
-            ->where('title', 'like', '%' . $search . '%')
-            ->orWhere('body', 'like', '%' . $search . '%'));
+        $query->where(fn($query) =>
+            $query->where('title', 'like', '%' . $search . '%')
+            ->orWhere('body', 'like', '%' . $search . '%')));
 
         $query->when(
             $filters['category'] ?? false,
